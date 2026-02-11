@@ -1,0 +1,1854 @@
+swagger: '2.0'
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: password
+    tokenUrl: http://10.11.195.85:58281/oauth/token
+    scopes: { }
+info:
+  title: ServiceOrder
+  description: Nokia FlowOne TMF641 API
+  version: 2.0.0
+host: 10.11.195.85:58281
+basePath: /flowone/v1
+schemes:
+  - http
+consumes:
+  - application/json;charset=utf-8
+produces:
+  - application/json;charset=utf-8
+tags:
+  - name: serviceOrder
+  - name: cancelServiceOrder
+  - name: listener
+paths:
+  /serviceorder:
+    post:
+      operationId: serviceOrderCreate
+      summary: serviceOrderCreate
+      tags:
+        - serviceOrder
+      parameters:
+        - schema:
+            $ref: '#/definitions/ServiceOrderCreate'
+          required: true
+          in: body
+          name: serviceOrder
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Success'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+    get:
+      operationId: queryAllServiceOrder
+      summary: queryAllServiceOrder
+      tags:
+        - serviceOrder
+      parameters:
+        - type: string
+          required: false
+          in: query
+          name: id
+        - type: string
+          required: false
+          in: query
+          name: state
+        - type: string
+          required: false
+          in: query
+          name: orderDate.gt
+        - type: string
+          required: false
+          in: query
+          name: orderStartDate.gt
+        - type: string
+          required: false
+          in: query
+          name: completeDate.gt
+        - type: string
+          required: false
+          in: query
+          name: category
+        - type: string
+          required: false
+          in: query
+          name: description
+        - type: string
+          required: false
+          in: query
+          name: externalId
+        - type: string
+          required: false
+          in: query
+          name: priority
+        - type: string
+          required: false
+          in: query
+          name: requestedCompletionDate.gt
+        - type: string
+          required: false
+          in: query
+          name: requestedStartDate.gt
+        - name: offset
+          required: false
+          in: query
+          type: integer
+        - name: limit
+          required: false
+          in: query
+          type: integer
+      responses:
+        '200':
+          description: Success
+          headers:
+            X-Total-Count:
+              type: integer
+          schema:
+            items:
+              $ref: '#/definitions/ServiceOrderQuery'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+  /serviceorder/{externalId}:
+    get:
+      operationId: queryServiceOrderById
+      summary: queryServiceOrderById
+      tags:
+        - serviceOrder
+      parameters:
+        - required: true
+          type: integer
+          name: externalId
+          in: path
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Success'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+    patch:
+      operationId: inFlightAmmendOrder
+      summary: inFlightAmmendOrder
+      tags:
+        - serviceOrder
+      parameters:
+        - required: true
+          type: integer
+          name: externalId
+          in: path
+        - schema:
+            $ref: '#/definitions/ServiceOrderPatch'
+          required: true
+          in: body
+          name: serviceOrder
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/Success'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+    delete:
+      operationId: inFlightCancelServiceOrderType_1
+      summary: inFlightCancelServiceOrder
+      tags:
+        - serviceOrder
+      parameters:
+        - required: true
+          type: integer
+          name: externalId
+          in: path
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Success'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+  /cancelServiceOrder/{externalId}:
+    post:
+      operationId: inFlightCancelServiceOrderType_2
+      summary: inFlightCancelServiceOrder
+      tags:
+        - cancelServiceOrder
+      parameters:
+        - required: true
+          type: integer
+          name: externalId
+          in: path
+        - schema:
+            $ref: '#/definitions/CancelServiceOrder'
+          required: true
+          in: body
+          name: inFlightCancelServiceOrder
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Success'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+  /hub:
+    post:
+      operationId: registerListener
+      summary: registerListener
+      tags:
+        - listener
+      parameters:
+        - name: registerListener
+          schema:
+            $ref: '#/definitions/RegisterListener'
+          required: true
+          in: body
+      responses:
+        '201':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterListenerQuery'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+    get:
+      operationId: queryAllListener
+      summary: queryAllListener
+      tags:
+        - listener
+      parameters: [ ]
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/QueryAllListeners'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+  /hub/{id}:
+    delete:
+      operationId: deleteListener
+      summary: deleteListener
+      tags:
+        - listener
+      parameters:
+        - name: id
+          type: integer
+          required: true
+          in: path
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Success'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+    get:
+      operationId: queryListener
+      summary: queryListener
+      tags:
+        - listener
+      parameters:
+        - name: id
+          type: integer
+          required: true
+          in: path
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RegisterListenerQuery'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - OAuth2: [ ]
+definitions:
+  ServiceOrderCreate:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      serviceUuid:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      completionDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  ServiceOrderQuery:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddressQuery'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      state:
+        type: string
+      completionDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  ServiceOrderPatch:
+    properties:
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  ReplyToAddress:
+    type: object
+    required:
+      - id
+      - url
+      - isAuthEnabled
+      - authUsername
+      - authPassword
+    properties:
+      id:
+        type: integer
+      url:
+        type: string
+      isAuthEnabled:
+        type: string
+      authUsername:
+        type: string
+      authPassword:
+        type: string
+  ReplyToAddressQuery:
+    type: object
+    required:
+      - id
+      - url
+      - isAuthEnabled
+      - authUsername
+      - authPassword
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+      isAuthEnabled:
+        type: string
+      authUsername:
+        type: string
+      authPassword:
+        type: string
+  ExternalReference:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      externalReferenceType:
+        type: string
+      name:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  OrderRelationship:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      href:
+        type: string
+      relationshipType:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  Note:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      author:
+        type: string
+      date:
+        type: string
+        format: date-time
+      text:
+        type: string
+      parentid:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  RelatedParty:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      href:
+        type: string
+      name:
+        type: string
+      role:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  ServiceOrderItem:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      action:
+        type: string
+      quantity:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      serviceOrderItemRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItemRelationship'
+      appointment:
+        $ref: '#/definitions/Appointment'
+      service:
+        $ref: '#/definitions/Service'
+  ServiceOrderItemRelationship:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      relationshipType:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      orderItem:
+        $ref: '#/definitions/OrderItem'
+  ServiceOrderItemStateChangeEvent:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      action:
+        type: string
+      quantity:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      serviceOrderItemRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItemRelationship'
+      appointment:
+        $ref: '#/definitions/Appointment'
+      service:
+        $ref: '#/definitions/Service'
+  OrderItem:
+    type: object
+    required:
+      - itemId
+    properties:
+      itemId:
+        type: string
+      serviceOrderHref:
+        type: string
+      serviceOrderId:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  Appointment:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      href:
+        type: string
+      description:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  Service:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      href:
+        type: string
+      name:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      endDate:
+        type: string
+        format: date-time
+      hasStarted:
+        type: boolean
+      isBundle:
+        type: boolean
+      isServiceEnabled:
+        type: boolean
+      serviceDate:
+        type: string
+        format: date-time
+      serviceType:
+        type: string
+      startDate:
+        type: string
+        format: date-time
+      startMode:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedServiceOrderItem'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceCharacteristic:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceCharacteristic'
+      serviceRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceRelationship'
+      feature:
+        type: array
+        items:
+          $ref: '#/definitions/Feature'
+      place:
+        type: array
+        items:
+          $ref: '#/definitions/Place'
+      relatedEntity:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedEntity'
+      supportingResource:
+        type: array
+        items:
+          $ref: '#/definitions/SupportingResource'
+      serviceSpecification:
+        $ref: '#/definitions/ServiceSpecification'
+      supportingService:
+        type: array
+        items:
+          $ref: '#/definitions/SupportingService'
+  SupportingService:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      href:
+        type: string
+      name:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      endDate:
+        type: string
+        format: date-time
+      hasStarted:
+        type: boolean
+      isBundle:
+        type: boolean
+      isServiceEnabled:
+        type: boolean
+      serviceDate:
+        type: string
+        format: date-time
+      serviceType:
+        type: string
+      startDate:
+        type: string
+        format: date-time
+      startMode:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedServiceOrderItem'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceCharacteristic:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceCharacteristic'
+      serviceRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceRelationship'
+      feature:
+        type: array
+        items:
+          $ref: '#/definitions/Feature'
+      place:
+        type: array
+        items:
+          $ref: '#/definitions/Place'
+      relatedEntity:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedEntity'
+      supportingResource:
+        type: array
+        items:
+          $ref: '#/definitions/SupportingResource'
+      serviceSpecification:
+        $ref: '#/definitions/ServiceSpecification'
+  RelatedServiceOrderItem:
+    required:
+      - itemId
+    properties:
+      itemId:
+        type: string
+      itemAction:
+        type: string
+      role:
+        type: string
+      serviceOrderHref:
+        type: string
+      serviceOrderId:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  ServiceCharacteristic:
+    required:
+      - name
+      - value
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+      valueType:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      characteristicRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/CharacteristicRelationship'
+  CharacteristicRelationship:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      relationshipType:
+        type: string
+      value:
+        type: string
+      valueType:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  ServiceRelationship:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      relationshipType:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      serviceCharacteristic:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceCharacteristic'
+  Feature:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      isBundle:
+        type: boolean
+      isEnabled:
+        type: boolean
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      constraint:
+        type: array
+        items:
+          $ref: '#/definitions/Constraint'
+      featureRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/FeatureRelationship'
+      featureCharacteristic:
+        type: array
+        items:
+          $ref: '#/definitions/featureCharacteristic'
+  Constraint:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      href:
+        type: string
+      version:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  featureCharacteristic:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  FeatureRelationship:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      relationshipType:
+        type: string
+      validFor:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  Place:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      href:
+        type: string
+      role:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@referredType':
+        type: string
+      '@type':
+        type: string
+  RelatedEntity:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      href:
+        type: string
+      role:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  SupportingResource:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      href:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  ServiceSpecification:
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      href:
+        type: string
+      version:
+        type: string
+      '@baseType':
+        type: string
+      '@referredType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+  CancelServiceOrder:
+    required:
+      - id
+    type: object
+    properties:
+      id:
+        type: string
+      cancellationReason:
+        type: string
+      requestedCancellationDate:
+        type: string
+  RegisterListener:
+    type: object
+    required:
+      - id
+      - callback
+    properties:
+      id:
+        type: integer
+      callback:
+        type: string
+      isAuthEnabled:
+        type: string
+      authUsername:
+        type: string
+      authPassword:
+        type: string
+  RegisterListenerQuery:
+    type: object
+    required:
+      - id
+      - callback
+    properties:
+      id:
+        type: string
+      callback:
+        type: string
+      isAuthEnabled:
+        type: string
+      authType:
+        type: string
+      authUsername:
+        type: string
+      authPassword:
+        type: string
+  ServiceOrderCreateEvent:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        $ref: '#/definitions/ServiceOrderCreateEventPayload'
+  ServiceOrderCreateEventPayload:
+    type: object
+    properties:
+      serviceOrder:
+        $ref: '#/definitions/CreateEvent'
+  ServiceOrderDeleteEvent:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        type: object
+        properties:
+          serviceOrder:
+            $ref: '#/definitions/DeleteEvent'
+  ServiceOrderCancelCreateEvent:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        $ref: '#/definitions/ServiceOrderCreateCancelEventPayload'
+  ServiceOrderCreateCancelEventPayload:
+    type: object
+    properties:
+      serviceOrder:
+        $ref: '#/definitions/CreateCancelEvent'
+  ServiceOrderAttributeValueChangeEvent:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        type: object
+        properties:
+          serviceOrder:
+            $ref: '#/definitions/AttributeValueChangeEvent'
+  ServiceOrderStateChangeEvent:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        $ref: '#/definitions/ServiceOrderStateChangeEventPayload'
+  ServiceOrderStateChangeEventPayload:
+    type: object
+    properties:
+      serviceOrder:
+        $ref: '#/definitions/StateChangeEvent'
+  ServiceOrderInformationRequiredEvent:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        type: object
+        properties:
+          serviceOrder:
+            $ref: '#/definitions/InformationRequiredEvent'
+  CreateEvent:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      requestedCancellationDate:
+        type: string
+        format: date-time
+      orderDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      completionDate:
+        type: string
+        format: date-time
+      cancellationDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      state:
+        type: string
+      stateMessage:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  DeleteEvent:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      requestedCancellationDate:
+        type: string
+        format: date-time
+      orderDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      completionDate:
+        type: string
+        format: date-time
+      cancellationDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      state:
+        type: string
+      stateMessage:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  CreateCancelEvent:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      requestedCancellationDate:
+        type: string
+        format: date-time
+      orderDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      completionDate:
+        type: string
+        format: date-time
+      cancellationDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      state:
+        type: string
+      stateMessage:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  AttributeValueChangeEvent:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      requestedCancellationDate:
+        type: string
+        format: date-time
+      orderDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      completionDate:
+        type: string
+        format: date-time
+      cancellationDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      state:
+        type: string
+      stateMessage:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  StateChangeEvent:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      requestedCancellationDate:
+        type: string
+        format: date-time
+      orderDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      completionDate:
+        type: string
+        format: date-time
+      cancellationDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      state:
+        type: string
+      stateMessage:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItemStateChangeEvent'
+      phaseNote:
+        $ref: '#/definitions/PhaseNote'
+  InformationRequiredEvent:
+    required:
+      - externalId
+      - id
+    properties:
+      externalId:
+        type: string
+      id:
+        type: string
+      href:
+        type: string
+      category:
+        type: string
+      description:
+        type: string
+      requestedCompletionDate:
+        type: string
+        format: date-time
+      requestedStartDate:
+        type: string
+        format: date-time
+      requestedCancellationDate:
+        type: string
+        format: date-time
+      orderDate:
+        type: string
+        format: date-time
+      startDate:
+        type: string
+        format: date-time
+      completionDate:
+        type: string
+        format: date-time
+      cancellationDate:
+        type: string
+        format: date-time
+      notificationContact:
+        type: string
+      ReplyTo:
+        $ref: '#/definitions/ReplyToAddress'
+      retransmissionFlag:
+        type: string
+      retransmissionKey:
+        type: string
+      byPassLock:
+        type: string
+      addNotificationsToResponse:
+        type: string
+      notificationMsgLevel:
+        type: string
+      state:
+        type: string
+      stateMessage:
+        type: string
+      priority:
+        type: string
+      '@baseType':
+        type: string
+      '@schemaLocation':
+        type: string
+      '@type':
+        type: string
+      externalReference:
+        type: array
+        items:
+          $ref: '#/definitions/ExternalReference'
+      orderRelationship:
+        type: array
+        items:
+          $ref: '#/definitions/OrderRelationship'
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/Note'
+      relatedParty:
+        type: array
+        items:
+          $ref: '#/definitions/RelatedParty'
+      serviceOrderItem:
+        type: array
+        items:
+          $ref: '#/definitions/ServiceOrderItem'
+  PhaseNote:
+    type: object
+    required:
+      - id
+      - message
+    properties:
+      id:
+        type: string
+      message:
+        type: string
+  Success:
+    required:
+      - id
+    type: object
+    properties:
+      id:
+        type: string
+  Error:
+    required:
+      - code
+      - reason
+    type: object
+    properties:
+      code:
+        type: string
+      reason:
+        type: string
+  QueryAllListeners:
+    properties:
+      listeners:
+        type: array
+        items:
+          $ref: '#/definitions/QueryAllListener'
+  QueryAllListener:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+      url:
+        type: string
+      isAuthEnabled:
+        type: string
+      authType:
+        type: string
+      authUsername:
+        type: string
+      authPassword:
+        type: string
+  Event:
+    type: object
+    properties:
+      eventId:
+        type: string
+      eventTime:
+        type: string
+        format: date-time
+      eventType:
+        type: string
+      event:
+        $ref: '#/definitions/Any'
+  Any:
+    type: object

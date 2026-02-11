@@ -1,0 +1,466 @@
+{
+  "href": "string",
+  "category": "string",
+  "description": "string",
+  "requestedCompletionDate": "2023-08-28T10:07:27.468Z",
+  "requestedStartDate": "2023-08-28T10:07:27.468Z",
+  "notificationContact": "string",
+  "@baseType": "string",
+  "@schemaLocation": "string",
+  "@type": "string",
+  "externalReference": [
+    {
+      "id": "string",
+      "externalReferenceType": "string",
+      "name": "string",
+      "@baseType": "string",
+      "@schemaLocation": "string",
+      "@type": "string"
+    }
+  ],
+  "orderRelationship": [
+    {
+      "id": "string",
+      "href": "string",
+      "relationshipType": "string",
+      "@baseType": "string",
+      "@referredType": "string",
+      "@schemaLocation": "string",
+      "@type": "string"
+    }
+  ],
+  "note": [
+    {
+      "id": "string",
+      "author": "string",
+      "date": "2023-08-28T10:07:27.468Z",
+      "text": "string",
+      "@baseType": "string",
+      "@schemaLocation": "string",
+      "@type": "string"
+    }
+  ],
+  "relatedParty": [
+    {
+      "id": "string",
+      "href": "string",
+      "name": "string",
+      "role": "string",
+      "@baseType": "string",
+      "@referredType": "string",
+      "@schemaLocation": "string",
+      "@type": "string"
+    }
+  ],
+  "serviceOrderItem": [
+    {
+      "id": "string",
+      "action": "string",
+      "quantity": "string",
+      "@baseType": "string",
+      "@schemaLocation": "string",
+      "@type": "string",
+      "serviceOrderItemRelationship": [
+        {
+          "id": "string",
+          "relationshipType": "string",
+          "@baseType": "string",
+          "@schemaLocation": "string",
+          "@type": "string",
+          "orderItem": {
+            "itemId": "string",
+            "serviceOrderHref": "string",
+            "serviceOrderId": "string",
+            "@baseType": "string",
+            "@referredType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        }
+      ],
+      "appointment": {
+        "id": "string",
+        "href": "string",
+        "description": "string",
+        "@baseType": "string",
+        "@referredType": "string",
+        "@schemaLocation": "string",
+        "@type": "string"
+      },
+      "service": {
+        "id": "string",
+        "href": "string",
+        "name": "string",
+        "category": "string",
+        "description": "string",
+        "endDate": "2023-08-28T10:07:27.468Z",
+        "hasStarted": true,
+        "isBundle": true,
+        "isServiceEnabled": true,
+        "serviceDate": "2023-08-28T10:07:27.468Z",
+        "serviceType": "string",
+        "startDate": "2023-08-28T10:07:27.468Z",
+        "startMode": "string",
+        "@baseType": "string",
+        "@referredType": "string",
+        "@schemaLocation": "string",
+        "@type": "string",
+        "note": [
+          {
+            "id": "string",
+            "author": "string",
+            "date": "2023-08-28T10:07:27.468Z",
+            "text": "string",
+            "@baseType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "serviceOrderItem": [
+          {
+            "itemId": "string",
+            "itemAction": "string",
+            "role": "string",
+            "serviceOrderHref": "string",
+            "serviceOrderId": "string",
+            "@baseType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "relatedParty": [
+          {
+            "id": "string",
+            "href": "string",
+            "name": "string",
+            "role": "string",
+            "@baseType": "string",
+            "@referredType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "serviceCharacteristic": [
+          {
+            "id": "string",
+            "name": "string",
+            "value": "string",
+            "valueType": "string",
+            "@baseType": "string",
+            "@schemaLocation": "string",
+            "@type": "string",
+            "characteristicRelationship": [
+              {
+                "id": "string",
+                "relationshipType": "string",
+                "value": "string",
+                "valueType": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ]
+          }
+        ],
+        "serviceRelationship": [
+          {
+            "id": "string",
+            "relationshipType": "string",
+            "@baseType": "string",
+            "@schemaLocation": "string",
+            "@type": "string",
+            "serviceCharacteristic": [
+              {
+                "id": "string",
+                "name": "string",
+                "value": "string",
+                "valueType": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string",
+                "characteristicRelationship": [
+                  {
+                    "id": "string",
+                    "relationshipType": "string",
+                    "value": "string",
+                    "valueType": "string",
+                    "@baseType": "string",
+                    "@schemaLocation": "string",
+                    "@type": "string"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "feature": [
+          {
+            "id": "string",
+            "isBundle": true,
+            "isEnabled": true,
+            "@baseType": "string",
+            "@schemaLocation": "string",
+            "@type": "string",
+            "constraint": [
+              {
+                "id": "string",
+                "name": "string",
+                "href": "string",
+                "version": "string",
+                "@baseType": "string",
+                "@referredType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "featureRelationship": [
+              {
+                "id": "string",
+                "name": "string",
+                "relationshipType": "string",
+                "validFor": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ]
+          }
+        ],
+        "place": [
+          {
+            "id": "string",
+            "name": "string",
+            "href": "string",
+            "role": "string",
+            "@baseType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "relatedEntity": [
+          {
+            "id": "string",
+            "name": "string",
+            "href": "string",
+            "role": "string",
+            "@baseType": "string",
+            "@referredType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "supportingResource": [
+          {
+            "id": "string",
+            "name": "string",
+            "href": "string",
+            "@baseType": "string",
+            "@referredType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "serviceSpecification": [
+          {
+            "id": "string",
+            "name": "string",
+            "href": "string",
+            "version": "string",
+            "@baseType": "string",
+            "@referredType": "string",
+            "@schemaLocation": "string",
+            "@type": "string"
+          }
+        ],
+        "supportingService": [
+          {
+            "id": "string",
+            "href": "string",
+            "name": "string",
+            "category": "string",
+            "description": "string",
+            "endDate": "2023-08-28T10:07:27.469Z",
+            "hasStarted": true,
+            "isBundle": true,
+            "isServiceEnabled": true,
+            "serviceDate": "2023-08-28T10:07:27.469Z",
+            "serviceType": "string",
+            "startDate": "2023-08-28T10:07:27.469Z",
+            "startMode": "string",
+            "@baseType": "string",
+            "@referredType": "string",
+            "@schemaLocation": "string",
+            "@type": "string",
+            "note": [
+              {
+                "id": "string",
+                "author": "string",
+                "date": "2023-08-28T10:07:27.469Z",
+                "text": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "serviceOrderItem": [
+              {
+                "itemId": "string",
+                "itemAction": "string",
+                "role": "string",
+                "serviceOrderHref": "string",
+                "serviceOrderId": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "relatedParty": [
+              {
+                "id": "string",
+                "href": "string",
+                "name": "string",
+                "role": "string",
+                "@baseType": "string",
+                "@referredType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "serviceCharacteristic": [
+              {
+                "id": "string",
+                "name": "string",
+                "value": "string",
+                "valueType": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string",
+                "characteristicRelationship": [
+                  {
+                    "id": "string",
+                    "relationshipType": "string",
+                    "value": "string",
+                    "valueType": "string",
+                    "@baseType": "string",
+                    "@schemaLocation": "string",
+                    "@type": "string"
+                  }
+                ]
+              }
+            ],
+            "serviceRelationship": [
+              {
+                "id": "string",
+                "relationshipType": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string",
+                "serviceCharacteristic": [
+                  {
+                    "id": "string",
+                    "name": "string",
+                    "value": "string",
+                    "valueType": "string",
+                    "@baseType": "string",
+                    "@schemaLocation": "string",
+                    "@type": "string",
+                    "characteristicRelationship": [
+                      {
+                        "id": "string",
+                        "relationshipType": "string",
+                        "value": "string",
+                        "valueType": "string",
+                        "@baseType": "string",
+                        "@schemaLocation": "string",
+                        "@type": "string"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "feature": [
+              {
+                "id": "string",
+                "isBundle": true,
+                "isEnabled": true,
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string",
+                "constraint": [
+                  {
+                    "id": "string",
+                    "name": "string",
+                    "href": "string",
+                    "version": "string",
+                    "@baseType": "string",
+                    "@referredType": "string",
+                    "@schemaLocation": "string",
+                    "@type": "string"
+                  }
+                ],
+                "featureRelationship": [
+                  {
+                    "id": "string",
+                    "name": "string",
+                    "relationshipType": "string",
+                    "validFor": "string",
+                    "@baseType": "string",
+                    "@schemaLocation": "string",
+                    "@type": "string"
+                  }
+                ]
+              }
+            ],
+            "place": [
+              {
+                "id": "string",
+                "name": "string",
+                "href": "string",
+                "role": "string",
+                "@baseType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "relatedEntity": [
+              {
+                "id": "string",
+                "name": "string",
+                "href": "string",
+                "role": "string",
+                "@baseType": "string",
+                "@referredType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "supportingResource": [
+              {
+                "id": "string",
+                "name": "string",
+                "href": "string",
+                "@baseType": "string",
+                "@referredType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ],
+            "serviceSpecification": [
+              {
+                "id": "string",
+                "name": "string",
+                "href": "string",
+                "version": "string",
+                "@baseType": "string",
+                "@referredType": "string",
+                "@schemaLocation": "string",
+                "@type": "string"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

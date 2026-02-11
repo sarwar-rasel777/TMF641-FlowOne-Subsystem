@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+
+	<Properties>
+		<Property name="APPENDER">$${env:LOG_APPENDER:-NONE_JSON_APPENDER}</Property>
+	</Properties>
+
+	<Appenders>
+
+		<Console name="ELASTIC_LAYOUT_APPENDER" target="SYSTEM_OUT">
+			<EcsLayout serviceName="my-app" serviceNodeName="my-app-cluster-node"/>
+		</Console>
+
+		<Console name="GCP_LAYOUT_APPENDER" target="SYSTEM_OUT">
+			<JsonTemplateLayout eventTemplateUri="classpath:GcpLayout.json"/>
+		</Console>
+
+		<Console name="NONE_JSON_APPENDER" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{-10}:%L traceID=%X{trace_id} spanID=%X{span_id} - %m%n"/>
+		</Console>
+
+	</Appenders>
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="${APPENDER}"/>
+		</Root>
+		<Logger name="org.hibernate.orm.deprecation" level="error" additivity="false">
+			<AppenderRef ref="${APPENDER}" />
+		</Logger>
+		<Logger name="at.compax" level="debug" additivity="false">
+			<AppenderRef ref="${APPENDER}" />
+		</Logger>
+	</Loggers>
+
+</Configuration>
